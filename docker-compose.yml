@@ -1,0 +1,19 @@
+version: '3.8'
+
+services:
+  potato:
+    build: .
+    container_name: potato_jarvis
+    restart: unless-stopped
+    # Se recomienda network_mode: host para que el contenedor comparta la interfaz de Tailscale del anfitrión
+    # de forma transparente y pueda exponerse automáticamente usando "EXPOSE_TAILSCALE=True".
+    network_mode: host
+    env_file:
+      - .env
+    volumes:
+      # Montar carpeta de logs si se desea persistencia
+      - ./logs:/app/logs
+      # Compartir sockets de audio si fuese necesario reproducir en local
+      - /dev/snd:/dev/snd
+    devices:
+      - /dev/snd:/dev/snd

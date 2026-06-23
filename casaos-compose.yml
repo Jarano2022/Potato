@@ -1,0 +1,40 @@
+version: '3.8'
+
+services:
+  potato:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: potato_jarvis
+    restart: unless-stopped
+    network_mode: host
+    env_file:
+      - .env
+    volumes:
+      - ./logs:/app/logs
+      - /dev/snd:/dev/snd
+    devices:
+      - /dev/snd:/dev/snd
+
+x-casaos:
+  architectures:
+    - amd64
+    - arm64
+  main: potato
+  # Un icono futurista de robot/IA dorado acorde con la nueva estética
+  icon: https://cdn-icons-png.flaticon.com/512/8649/8649607.png
+  title:
+    en_us: Potato AI Assistant
+    es_ES: Asistente de IA Potato
+  description:
+    en_us: "Advanced AI voice assistant with a gorgeous HTML5 web client, reactive visualizer, TTS voice, and automatic Tailscale Funnel support."
+    es_ES: "Asistente de voz avanzado con IA, interfaz web HTML5 reactiva, síntesis de voz y soporte para exposición con Tailscale Funnel."
+  tagline:
+    en_us: "Advanced AI voice assistant for your home server"
+    es_ES: "Asistente de IA Potato para tu servidor doméstico"
+  developer: "Antigravity"
+  author: "Jofre"
+  port_map: "8082"
+  scheme: http
+  index: /
+

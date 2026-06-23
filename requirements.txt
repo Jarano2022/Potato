@@ -1,0 +1,9 @@
+# Dependencias del proyecto principal de Potato
+google-genai
+customtkinter
+opencv-python
+Pillow
+python-dotenv
+SpeechRecognition
+pyaudio
+requests
